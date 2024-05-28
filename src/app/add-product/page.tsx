@@ -3,7 +3,7 @@ export const metadata = {
 };
 
 import React from "react";
-import prisma from "../lib/db";
+import {prisma} from "../lib/db/prisma";
 import { redirect } from "next/navigation";
 import SubmitFormButton from "../components/SubmitFormButton";
 
