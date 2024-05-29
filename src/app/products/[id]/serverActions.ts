@@ -18,7 +18,7 @@ export async function incrementProductQty(productId: string) {
   } else {
     await prisma.cartItem.create({
       data: {
-        cartID: cart.id,
+        cartId: cart.id,
         productId,
         quantity: 1,
       },

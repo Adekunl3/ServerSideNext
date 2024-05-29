@@ -4,6 +4,9 @@ import logo from "@/app/assets/apple-touch-icon.png";
 import { redirect } from "next/navigation";
 import { getCart } from "../lib/db/carts";
 import ShoppingCartButton from "./ShoppingCartButton";
+import UserMenuButton from "./UserMenuButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 async function searchProducts(formData:FormData) {
   "use server"
@@ -16,7 +19,9 @@ async function searchProducts(formData:FormData) {
 }
 
 export default async function Navbar() {
+  const session = await getServerSession(authOptions)
 const cart = await getCart()
+
   return (
     <div className="bg-base-100">
       <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2">
@@ -56,6 +61,7 @@ const cart = await getCart()
             </div>
           </form>
             <ShoppingCartButton cart={cart}/>
+            <UserMenuButton session={session} />
         </div>
       </div>
     
