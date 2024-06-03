@@ -6,7 +6,7 @@ import React from "react";
 import {prisma} from "../lib/db/prisma";
 import { redirect } from "next/navigation";
 import SubmitFormButton from "../components/SubmitFormButton";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../../@/utils/authOptions";
 import { getServerSession } from "next-auth";
 
 
