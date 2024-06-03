@@ -75,7 +75,7 @@ model Session {
 
 //contains username, email and image we get from google when the user signs in
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
   emailVerified DateTime?
