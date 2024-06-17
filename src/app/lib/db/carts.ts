@@ -21,6 +21,7 @@ export type ShoppingCart = CartWithProducts & {
 
 export async function getCart(): Promise<ShoppingCart | null> {
   const session = await getServerSession(authOptions);
+  console.log("session", session)
 
   let cart: CartWithProducts | null = null;
 
@@ -29,6 +30,7 @@ export async function getCart(): Promise<ShoppingCart | null> {
     //   where: { userId: session.user.id },
     //   include: { items: { include: { product: true } } },
     // });
+    console.log("logged-in user:", cart)
     
   } else {
     const localCartId = cookies().get("localCartId")?.value;
@@ -157,7 +159,7 @@ function mergeCartItems(...cartItems: CartItem[][]) {
     items.forEach((item) => {
       const existingItem = acc.find((i) => i.productId === item.productId);
       if (existingItem) {
-        existingItem.quantity + item.quantity;
+        existingItem.quantity += item.quantity;
       } else {
         acc.push(item);
       }

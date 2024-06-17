@@ -36,5 +36,5 @@ export async function incrementProductQty(productId: string) {
     });
   }
 
-  revalidatePath("/products/[id]");
+  revalidatePath("/products/[id]", );
 }
