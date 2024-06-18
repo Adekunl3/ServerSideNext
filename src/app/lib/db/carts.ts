@@ -26,10 +26,10 @@ export async function getCart(): Promise<ShoppingCart | null> {
   let cart: CartWithProducts | null = null;
 
   if (session) { 
-    // cart = await prisma.cart.findFirst({
-    //   where: { userId: session.user.id },
-    //   include: { items: { include: { product: true } } },
-    // });
+    cart = await prisma.cart.findFirst({
+      where: { userId: session.user.id },
+      include: { items: { include: { product: true } } },
+    });
     console.log("logged-in user:", cart)
     
   } else {
