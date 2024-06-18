@@ -18,10 +18,18 @@ export const authOptions: NextAuthOptions = {
     ],
   
     callbacks: {
-      session({ session, user }) {
+      async session({ session, user }) {
+        //fetch the user's role from the database
+        const dbUser = await prisma.user.findUnique({
+          where: {id:user.id},
+        })
+
+        if(dbUser) { 
         session.user.id = user.id;
-        return session;
-      },
+       session.user.role = dbUser.role
+      }
+      return session;
+    },
     },
     events: {
       async signIn({ user }) {

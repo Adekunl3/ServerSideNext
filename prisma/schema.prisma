@@ -83,6 +83,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Cart          Cart[]
+  role          String    @default("user") // Add this line
 
   @@map("users")
 }

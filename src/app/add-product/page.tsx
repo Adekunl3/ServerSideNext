@@ -18,6 +18,9 @@ async function addProduct(formData: FormData) {
   if (!session) {
     redirect("/api/auth/signin?callbackurl=/add-product")
   }
+if (session.user.role !== 'admin'){
+  redirect("/not-authorized") //redirect to a not authorized page or similar 
+}
 
   const name = formData.get("name")?.toString();
   const description = formData.get("description")?.toString();
@@ -42,6 +45,9 @@ export default async function AddProduct() {
 
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/add-product")
+  }
+  if (session.user.role !== 'admin'){
+    redirect("/not-authorized")
   }
   return (
     <>
