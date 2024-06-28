@@ -49,9 +49,9 @@ export default async function Navbar() {
             <span className="relative z-10"> FIDU </span>
           </Link>
         </div>
-        <div className="flex-none gap-2 flex items-center">
-          <Link href="/allProducts" className="btn btn-ghost text-xl">Shop</Link>
-          <Link href="/contact" className="btn btn-ghost text-xl">contact us</Link>
+        <div className="flex-none gap-0 flex items-center">
+          <Link href="/allProducts" className="btn btn-ghost">Shop</Link>
+          <Link href="/contact" className="btn btn-ghost">contact us</Link>
           <form action={searchProducts}>
             <div className="form-control">
               <input
