@@ -17,6 +17,12 @@ export function generateMetadata({
 export default async function SearchPage({
   searchParams: { query },
 }: SearchPageProps) {
+  console.log("Search query:", query); // Log the search query for debugging
+
+  if (!query) {
+    return <div className="text-center">Please enter a search term</div>;
+  }
+
   const products = await prisma.product.findMany({
     where: {
       OR: [
@@ -33,7 +39,7 @@ export default async function SearchPage({
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard product={product} key={product.id} />
       ))}
     </div>

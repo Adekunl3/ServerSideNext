@@ -1,5 +1,4 @@
 import { Product } from "@prisma/client";
-import { link } from "fs";
 import Link from "next/link";
 import PriceTag from "./PriceTag";
 import Image from "next/image";
@@ -16,21 +15,23 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={"/products/" + product.id}
-      className="card w-full bg-base-100 hover:shadow-xl transition-shadow"
+      className="card w-full bg-base-100 hover:shadow-xl"
     >
-      <figure>
+      <figure className="h-48 w-full flex justify-center items-center">
         <Image
           src={product.imageUrl}
           alt={product.name}
           width={800}
           height={400}
-          className="h-48 object-cover"
+          className="h-full w-full object-cover"
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{product.name}</h2>
-        {isNew && <div className="badge badge-secondary">NEW</div>}
-        <p>{product.description}</p>
+      <div className="card-body flex flex-col justify-between flex-grow">
+        <div>
+          <h2 className="card-title">{product.name}</h2>
+          {isNew && <div className="badge badge-secondary">NEW</div>}
+          <p className="line-clamp-3">{product.description}</p>
+        </div>
         <PriceTag price={product.price} />
       </div>
     </Link>

@@ -98,3 +98,14 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
+
+model ContactFormSubmission {
+ id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String
+  fullName  String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+
+

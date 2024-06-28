@@ -4,8 +4,6 @@ import { cookies } from "next/headers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../@/utils/authOptions";
 
-
-
 export type CartWithProducts = Prisma.CartGetPayload<{
   include: { items: { include: { product: true } } };
 }>;
@@ -21,17 +19,16 @@ export type ShoppingCart = CartWithProducts & {
 
 export async function getCart(): Promise<ShoppingCart | null> {
   const session = await getServerSession(authOptions);
-  console.log("session", session)
+  console.log("session", session);
 
   let cart: CartWithProducts | null = null;
 
-  if (session) { 
+  if (session) {
     cart = await prisma.cart.findFirst({
       where: { userId: session.user.id },
       include: { items: { include: { product: true } } },
     });
-    console.log("logged-in user:", cart)
-    
+    console.log("logged-in user:", cart);
   } else {
     const localCartId = cookies().get("localCartId")?.value;
     cart = localCartId
@@ -47,10 +44,7 @@ export async function getCart(): Promise<ShoppingCart | null> {
   }
   return {
     ...cart,
-    size: cart.items.reduce(
-      (accumulate, item) => accumulate + item.quantity,
-      0
-    ),
+    size: cart.items.reduce((accumulate, item) => accumulate + item.quantity, 0),
     subtotal: cart.items.reduce(
       (accumulate, item) => accumulate + item.quantity * item.product.price,
       0
@@ -72,17 +66,13 @@ export async function createCart(): Promise<ShoppingCart> {
       data: {},
     });
 
-    //Note: needs encryption + secure settings in real prod. app
-    cookies().set("localCartId", newCart.id);
+    cookies().set("localCartId", newCart.id, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+    });
   }
-
-  //store anonymous cart that store users without login
-  //cookies itself need additional security settings for production mode
-
-  // console.log(cookies())
-
-  //encrypt the cartId, cos the user can modify the cookies and this way, they could
-  //get id of another cart, which can make them change the cart of another user.
 
   return {
     ...newCart,
@@ -118,7 +108,7 @@ export async function mergeAnonymousCart(userId: string) {
       });
 
       await tx.cart.update({
-        where: {id: userCart.id},
+        where: { id: userCart.id },
         data: {
           items: {
             createMany: {
@@ -130,7 +120,7 @@ export async function mergeAnonymousCart(userId: string) {
             },
           },
         },
-      })
+      });
     } else {
       await tx.cart.create({
         data: {
@@ -151,9 +141,15 @@ export async function mergeAnonymousCart(userId: string) {
       where: { id: localCart.id },
     });
 
-    cookies().set("localCartId", "");
+    cookies().set("localCartId", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+    });
   });
 }
+
 function mergeCartItems(...cartItems: CartItem[][]) {
   return cartItems.reduce((acc, items) => {
     items.forEach((item) => {

@@ -7,7 +7,11 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require('@tailwindcss/line-clamp'),
+  ],
+
   daisyui: {
     themes: [
       {
@@ -23,10 +27,11 @@ const config: Config = {
           error: "#ea535a",
           body: {
             "background-color": "#e3e6e6",
-}
+          },
         },
       },
     ],
   },
 };
+
 export default config;

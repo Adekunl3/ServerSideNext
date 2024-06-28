@@ -8,19 +8,19 @@ import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../@/utils/authOptions";
 
-async function searchProducts(formData:FormData) {
-  "use server"
+async function searchProducts(formData: FormData) {
+  "use server";
 
-  const searchQuery = formData.get("searchQuery")?.toString()
+  const searchQuery = formData.get("searchQuery")?.toString();
 
   if (searchQuery) {
-    redirect("/search?query" + searchQuery )
+    redirect("/search?query=" + searchQuery);
   }
 }
 
 export default async function Navbar() {
-  const session = await getServerSession(authOptions)
-const cart = await getCart()
+  const session = await getServerSession(authOptions);
+  const cart = await getCart();
 
   return (
     <div className="bg-base-100">
@@ -49,22 +49,22 @@ const cart = await getCart()
             <span className="relative z-10"> FIDU </span>
           </Link>
         </div>
-        <div className="flex-none gap-2">
+        <div className="flex-none gap-2 flex items-center">
+          <Link href="/allProducts" className="btn btn-ghost text-xl">Shop</Link>
+          <Link href="/contact" className="btn btn-ghost text-xl">contact us</Link>
           <form action={searchProducts}>
             <div className="form-control">
-              <input 
-              name="searchQuery"
-              placeholder="search"
-              className="input input-bordered w-full min-w-[100px]"
+              <input
+                name="searchQuery"
+                placeholder="search"
+                className="input input-bordered w-full min-w-[100px]"
               />
-
             </div>
           </form>
-            <ShoppingCartButton cart={cart}/>
-            <UserMenuButton session={session} />
+          <ShoppingCartButton cart={cart} />
+          <UserMenuButton session={session} />
         </div>
       </div>
-    
     </div>
   );
 }
