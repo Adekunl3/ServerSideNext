@@ -4,6 +4,7 @@ import CartEntry from "./CartEntry";
 import { setProductQuantity } from "./actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 export const metadata = {
   title: "Your Shopping Cart - FIDU",
@@ -38,20 +39,29 @@ export default async function CartPage() {
       ))}
       {!cart?.items.length && <p>Your cart is empty.</p>}
       <div className="flex flex-col items-end sm:items-center">
-        <p className="mb-3 font-bold">
+        <p className="mb-3 font-bold mr-16">
           Total: {formatPrice(cart?.subtotal || 0)}
         </p>
-        <a
-          href={whatsappMessage}
-          target="_blank"
-          rel="noopener noreferrer"
-          // className="btn btn-primary sm:mr-[200px]"
-        >
-          <button className="btn btn-primary sm:mr-[200px]">
-            <FontAwesomeIcon icon={faWhatsapp} className="mr-2 w-[30px] " />
-            Checkout & chat with the seller
-          </button>
-        </a>
+        <div className="flex flex-col sm:flex-row items-center justify-center mr-16">
+  <a
+    href={whatsappMessage}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn btn-primary mb-3 sm:mr-3 sm:mb-0" // Adjust margin for spacing
+  >
+    <FontAwesomeIcon icon={faWhatsapp} className="mr-2 w-5" />
+    Chat with the seller
+  </a>
+
+  <Link className="btn btn-primary" href="/payment">
+ 
+    Checkout to payment
+
+</Link>
+</div>
+
+
+
       </div>
     </div>
   );
