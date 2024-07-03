@@ -61,7 +61,7 @@ export default async function Navbar() {
               />
             </div>
           </form>
-          <ShoppingCartButton cart={cart} />
+          <ShoppingCartButton session={session} />
           <UserMenuButton session={session} />
         </div>
       </div>

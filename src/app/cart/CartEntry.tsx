@@ -15,7 +15,7 @@ export default function CartEntry({
   cartItem: { product, quantity },
   setProductQty,
 }: CartEntryProps) {
- const [isPending, startTransition ] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const quantityOptions: JSX.Element[] = [];
   for (let i = 1; i <= 99; i++) {
@@ -47,11 +47,10 @@ export default function CartEntry({
               className="select select-bordered w-full max-w-[80px"
               defaultValue={quantity}
               onChange={(e) => {
-const newQuantity = parseInt(e.currentTarget.value)
-startTransition(async () => {
-await setProductQty(product.id, newQuantity)
-})
-
+                const newQuantity = parseInt(e.currentTarget.value);
+                startTransition(async () => {
+                  await setProductQty(product.id, newQuantity);
+                });
               }}
             >
               <option value={0}> 0 (Remove)</option>
@@ -61,9 +60,10 @@ await setProductQty(product.id, newQuantity)
 
           <div className="flex items-center gap-3">
             Total: {formatPrice(product.price * quantity)}
-            {isPending && <span className="loading loading-spinner loading-sm" />}
+            {isPending && (
+              <span className="loading loading-spinner loading-sm" />
+            )}
           </div>
-          
         </div>
       </div>
       <div className="divider" />

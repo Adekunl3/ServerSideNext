@@ -43,25 +43,20 @@ export default async function CartPage() {
           Total: {formatPrice(cart?.subtotal || 0)}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center mr-16">
-  <a
-    href={whatsappMessage}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="btn btn-primary mb-3 sm:mr-3 sm:mb-0" // Adjust margin for spacing
-  >
-    <FontAwesomeIcon icon={faWhatsapp} className="mr-2 w-5" />
-    Chat with the seller
-  </a>
+          <a
+            href={whatsappMessage}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary mb-3 sm:mr-3 sm:mb-0" // Adjust margin for spacing
+          >
+            <FontAwesomeIcon icon={faWhatsapp} className="mr-2 w-5" />
+            Chat with the seller
+          </a>
 
-  <Link className="btn btn-primary" href="/payment">
- 
-    Checkout to payment
-
-</Link>
-</div>
-
-
-
+          <Link className="btn btn-primary" href="/payment">
+            Checkout to payment
+          </Link>
+        </div>
       </div>
     </div>
   );
