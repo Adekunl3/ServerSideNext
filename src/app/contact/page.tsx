@@ -27,7 +27,7 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto my-8">
-      <h1 className="text-4xl font-bold mb-4">Contact US</h1>
+      <h1 className="text-xl text-red-400 font-bold mb-4">Curious?</h1>
       {success ? (
         <div className="text-green-500 font-bold">
             <h2 className="text-4xl font-bold mb-4">Email Sent Successfully!</h2>

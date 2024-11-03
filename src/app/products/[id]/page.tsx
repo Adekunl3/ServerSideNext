@@ -31,8 +31,6 @@ export async function generateMetadata(
         images: [{url: product.imageUrl}]
     }
    }
-
-
 }
 export default async function ProductPage (
     {params: {id}} : ProductPageProps

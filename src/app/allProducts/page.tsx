@@ -22,7 +22,7 @@ export default async function AllProducts({ searchParams }: { searchParams: any 
 
   return (
     <div className="container mx-auto  ">
-    <h1 className="text-4xl font-bold my-8">All Products</h1>
+    <h1 className="text-xl font-bold my-2">All Products</h1>
     <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
       {products.map((product) => (
         <Link key={product.id} href={`/products/${product.id}`}>

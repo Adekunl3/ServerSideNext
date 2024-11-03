@@ -3,6 +3,7 @@ import { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/app/lib/db/prisma";
 import GoogleProvider from "next-auth/providers/google";
+
 import NextAuth from "next-auth/next";
 import { env } from "@/app/lib/env";
 import { mergeAnonymousCart } from "@/app/lib/db/carts";
@@ -24,10 +25,11 @@ export const authOptions: NextAuthOptions = {
           where: {id:user.id},
         })
 
-        if(dbUser) { 
-        session.user.id = user.id;
-       session.user.role = dbUser.role
-      }
+       // Reset session details each time to avoid cross-account conflict
+      session.user = {
+        id: user.id,
+        role: dbUser?.role || 'user',  // or set default role if needed
+     };
       return session;
     },
     },
@@ -36,4 +38,5 @@ export const authOptions: NextAuthOptions = {
         await mergeAnonymousCart(user.id);
       },
     },
+    debug: true,
   };

@@ -7,6 +7,7 @@ import ShoppingCartButton from "./ShoppingCartButton";
 import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../@/utils/authOptions";
+import {useState, useTransition} from "react";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -22,9 +23,11 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions);
   const cart = await getCart();
 
+  
+
   return (
-    <div className="bg-base-100">
-      <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2">
+    <div className=" bg-slate-400 fixed top-0 left-0 right-0 z-50">
+      <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2 ">
         <div className="flex-1">
           <Link
             href="/"

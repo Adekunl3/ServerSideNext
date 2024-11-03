@@ -38,6 +38,8 @@ export default async function CartPage() {
         />
       ))}
       {!cart?.items.length && <p>Your cart is empty.</p>}
+     
+
       <div className="flex flex-col items-end sm:items-center">
         <p className="mb-3 font-bold mr-16">
           Total: {formatPrice(cart?.subtotal || 0)}
@@ -57,6 +59,12 @@ export default async function CartPage() {
             Checkout to payment
           </Link>
         </div>
+        <div className=" text-success">
+        <h1> 
+        Test is it
+          </h1>
+      </div>
+
       </div>
     </div>
   );

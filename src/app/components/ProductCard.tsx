@@ -27,13 +27,18 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
       </figure>
       <div className="card-body flex flex-col justify-between flex-grow">
+
+      
         <div>
           <h2 className="card-title">{product.name}</h2>
           {isNew && <div className="badge badge-secondary">NEW</div>}
           <p className="line-clamp-3">{product.description}</p>
         </div>
         <PriceTag price={product.price} />
+
+       
       </div>
     </Link>
+    
   );
 }
