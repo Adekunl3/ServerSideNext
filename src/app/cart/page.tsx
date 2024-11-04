@@ -37,8 +37,8 @@ export default async function CartPage() {
 
   // Full message with item details and total
   const messageText = `Checkout items:\n\n${itemsDetails}\n\nTotal: ${formatPrice(cart?.subtotal || 0)}`;
-  // const whatsappLink = `https://wa.me/2349160820006?text=${encodeURIComponent(messageText)}`;
-  const whatsappLink = `whatsapp://send?phone=+2349160820006?text=${encodeURIComponent(messageText)}`;
+  const whatsappLink = `https://wa.me/2349160820006?text=${encodeURIComponent(messageText)}`;
+  // const whatsappLink = `whatsapp://send?phone=09160820006?text=${encodeURIComponent(messageText)}`;
 
   // Log for debugging
   console.log("Generated WhatsApp Link:", whatsappLink);
